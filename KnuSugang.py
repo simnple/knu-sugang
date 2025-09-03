@@ -1,5 +1,3 @@
-# from ResponseCode import AddLectureStatus
-
 from bs4 import BeautifulSoup
 from google import genai
 import requests
