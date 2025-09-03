@@ -15,7 +15,8 @@ ENDPOINT = {
     "SUGANG_PAGE": "/p/s/sugangMain",
     "ADD_LECTURE": "/d/s/add",
     "MACRO_INIT": "/d/m/macroInit",
-    "MACRO_IMG": "/d/m/macroImg"
+    "MACRO_IMG": "/d/m/macroImg",
+    "MACRO_CHECK": "/d/m/macroCheck"
 }
 
 class KnuSugang():
@@ -83,13 +84,15 @@ class KnuSugang():
     def get_macro_image(self):
         response = requests.post(SUGANG_URL + ENDPOINT["MACRO_INIT"] + f"?fake={self.current_time()}", headers=self.headers)
 
-        if response.json()["code"] != "200":
+        result = response.json()
+        if result["code"] != "200":
             raise ValueError("invalid code")
         
         response = requests.get(SUGANG_URL + ENDPOINT["MACRO_IMG"] + f"?fake={self.current_time()}", headers=self.headers)
 
         open("image.png", "wb").write(response.content)
-    
+        return result
+
     def solve_macro_image(self, api_key):
         client = genai.Client(api_key=api_key)
 
@@ -100,3 +103,12 @@ class KnuSugang():
         )
 
         return response.text
+
+    def input_code(self, code):
+        payload = {
+            "secNumber": code
+        }
+
+        response = requests.post(SUGANG_URL + ENDPOINT["MACRO_CHECK"] + f"?fake={self.current_time()}", headers=self.headers, data=payload)
+
+        return {"code": int(response.json()["code"]), "failCnt": int(response.json()["failCnt"]), "message": response.json()["message"]}
