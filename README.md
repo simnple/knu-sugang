@@ -8,6 +8,8 @@ git clone https://github.com/simnple/knu-sugang.git
 in python code you need to import **KnuSugang**
 ```python
 from KnuSugang import KnuSugang
+
+sugang = KnuSugang()
 ```
 
 ## Code
