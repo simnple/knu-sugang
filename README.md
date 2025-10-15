@@ -25,11 +25,11 @@ sugang = KnuSugang()
   - 이 hp는 rn value와 강의 코드 분반을 조합하여 생성합니다.
 - fake 파라미터
   - 사실 이게 보안 요소에 포함되는지는 모르겠습니다만, 현재 시각을 fake 인자로 넘깁니다.
-  - timestamp의 형식은 ms까지 입니다.
+  - timestamp의 단위는 ms 입니다.
 - rn name and rn value
   - 수강 신청을 진행하려면 빠지면 안되는 요소입니다.
   - header에 rn name: rn value 형식으로 들어가 있으며, 없다면 요청이 정상적으로 보내지지 않습니다.
-  - 이는 서버에서 생성해주기에 생성 로직은 잘 모르겠습니다.
+  - 이는 서버에서 생성해주는 방식입니다.
 
 ## Endpoints
 Endpoint에 해당되는 응답 코드들을 정리했습니다.
